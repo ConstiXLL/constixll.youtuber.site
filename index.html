@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConstiXLL | Official Website</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #050805;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    header {
+      padding: 22px;
+      background: #101810;
+      border-bottom: 2px solid #39ff14;
+      color: #39ff14;
+      font-size: 25px;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
+    .hero { padding: 75px 20px 55px; }
+    .logo {
+      font-size: clamp(48px, 12vw, 85px);
+      font-weight: 900;
+      text-shadow: 0 0 25px #39ff14;
+      margin: 20px 0;
+    }
+    .green { color: #39ff14; }
+    p { color: #b8c5b8; line-height: 1.7; }
+    .button {
+      display: inline-block;
+      margin: 10px 5px;
+      padding: 14px 22px;
+      border-radius: 8px;
+      background: #39ff14;
+      color: #071007;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .button:hover { background: white; }
+    section { padding: 35px 20px; }
+    h2 { color: #39ff14; }
+    .card {
+      max-width: 500px;
+      margin: 15px auto;
+      padding: 22px;
+      border: 1px solid #39ff14;
+      border-radius: 12px;
+      background: #101610;
+    }
+    footer {
+      padding: 25px;
+      margin-top: 30px;
+      border-top: 1px solid #39ff14;
+      color: #879487;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <header>CONSTI<span class="green">XLL</span></header>
+
+  <main>
+    <div class="hero">
+      <p>WELCOME TO MY OFFICIAL WEBSITE</p>
+      <div class="logo">CONSTI<span class="green">XLL</span></div>
+      <p>🎮 GAMING · VIDEOS · GOOD VIBES 🎮</p>
+      <p>Welcome to the ConstiXLL universe.<br>
+      Get ready to play, watch, and level up!</p>
+      <a class="button" href="#games">EXPLORE</a>
+      <a class="button" href="#socials">MY LINKS</a>
+    </div>
+
+    <section id="games">
+      <h2>🎮 GAME ZONE</h2>
+      <div class="card">
+        <h3>Green Reaction Challenge</h3>
+        <p>Test your reflexes! Wait for green, then tap as fast as you can.</p>
+        <button class="button" id="game">START GAME</button>
+        <p id="result">Ready to play?</p>
+      </div>
+    </section>
+
+    <section id="socials">
+      <h2>🔥 CONNECT WITH ME</h2>
+      <div class="card">
+        <h3>YouTube</h3>
+        <p>Watch my gaming videos and shorts!</p>
+        <a class="button" href="https://www.youtube.com/" target="_blank" rel="noopener">YOUTUBE</a>
+      </div>
+      <div class="card">
+        <h3>My Socials</h3>
+        <p>More ConstiXLL content coming soon!</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> CONSTIXLL · LEVEL UP EVERY DAY 💚
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    let waiting = false;
+    let started = 0;
+    let timer;
+
+    const game = document.getElementById("game");
+    const result = document.getElementById("result");
+
+    game.onclick = function() {
+      clearTimeout(timer);
+
+      if (waiting === true) {
+        waiting = false;
+        game.style.background = "#39ff14";
+        game.textContent = "START AGAIN";
+        result.textContent = "Too early! Try again.";
+        return;
+      }
+
+      waiting = true;
+      game.style.background = "#d83232";
+      game.textContent = "WAIT FOR GREEN...";
+      result.textContent = "Don't tap yet!";
+
+      timer = setTimeout(function() {
+        if (!waiting) return;
+        started = performance.now();
+        game.style.background = "#39ff14";
+        game.textContent = "TAP NOW!";
+        result.textContent = "GO GO GO!";
+        waiting = "go";
+      }, 1500 + Math.random() * 2500);
+    };
+
+    game.addEventListener("click", function() {
+      if (waiting !== "go") return;
+      const time = Math.round(performance.now() - started);
+      waiting = false;
+      game.style.background = "#39ff14";
+      game.textContent = "PLAY AGAIN";
+      result.textContent = "Your reaction time: " + time + " ms!";
+    });
+  </script>
+</body>
+</html>
