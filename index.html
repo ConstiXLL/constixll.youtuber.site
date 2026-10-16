@@ -1,153 +1,480 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ConstiXLL | Official Website</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: #050805;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-    header {
-      padding: 22px;
-      background: #101810;
-      border-bottom: 2px solid #39ff14;
-      color: #39ff14;
-      font-size: 25px;
-      font-weight: bold;
-      letter-spacing: 3px;
-    }
-    .hero { padding: 75px 20px 55px; }
-    .logo {
-      font-size: clamp(48px, 12vw, 85px);
-      font-weight: 900;
-      text-shadow: 0 0 25px #39ff14;
-      margin: 20px 0;
-    }
-    .green { color: #39ff14; }
-    p { color: #b8c5b8; line-height: 1.7; }
-    .button {
-      display: inline-block;
-      margin: 10px 5px;
-      padding: 14px 22px;
-      border-radius: 8px;
-      background: #39ff14;
-      color: #071007;
-      font-weight: bold;
-      text-decoration: none;
-    }
-    .button:hover { background: white; }
-    section { padding: 35px 20px; }
-    h2 { color: #39ff14; }
-    .card {
-      max-width: 500px;
-      margin: 15px auto;
-      padding: 22px;
-      border: 1px solid #39ff14;
-      border-radius: 12px;
-      background: #101610;
-    }
-    footer {
-      padding: 25px;
-      margin-top: 30px;
-      border-top: 1px solid #39ff14;
-      color: #879487;
-      font-size: 13px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#050805">
+<title>ConstiXLL — Official Hub</title>
+<style>
+:root {
+  --bg: #050805;
+  --panel: #0c140e;
+  --green: #55ff32;
+  --line: #28452b;
+  --muted: #a5b5a5;
+  --white: #f3fff1;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: radial-gradient(ellipse at 50% -10%, #16351b, transparent 48%), var(--bg);
+  color: var(--white);
+  font-family: system-ui, Arial, sans-serif;
+}
+a { color: inherit; text-decoration: none; }
+button, input, textarea, select { font: inherit; }
+.green { color: var(--green); }
+.wrap { width: min(1120px, 92%); margin: auto; }
+.top {
+  position: sticky; top: 0; z-index: 5;
+  background: #050805ed; border-bottom: 1px solid var(--line);
+}
+.nav {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 15px; min-height: 70px;
+}
+.logo { font-weight: 950; letter-spacing: 2px; font-size: 20px; }
+.logo span { color: var(--green); }
+.navlinks { display: flex; gap: 20px; font-size: 12px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--green); background: var(--green);
+  color: #061006; padding: 12px 16px; border-radius: 7px;
+  font-weight: 850; font-size: 12px; cursor: pointer;
+}
+.btn.alt { background: transparent; color: var(--green); }
+.hero {
+  padding: 65px 0 50px; display: grid;
+  grid-template-columns: 1fr 1fr; gap: 30px; align-items: center;
+}
+.eyebrow { color: var(--green); font-size: 10px; letter-spacing: 3px; font-weight: 900; }
+h1 { font-size: clamp(42px, 7vw, 78px); line-height: 1; }
+.hero p, .muted { color: var(--muted); line-height: 1.8; font-size: 14px; }
+.hero-panel {
+  border: 1px solid var(--line); border-radius: 18px; padding: 25px;
+  background: linear-gradient(145deg, #102015, #080d09);
+}
+.symbol { font-size: 110px; font-weight: 1000; text-align: center; color: var(--green); }
+.panel-note { text-align: center; color: #8ea18f; font-size: 10px; letter-spacing: 3px; }
+.section { padding: 45px 0 55px; border-top: 1px solid #203522; }
+.head { display: flex; justify-content: space-between; gap: 15px; align-items: center; }
+.field {
+  width: 100%; padding: 13px; background: #050a06;
+  border: 1px solid #2a432d; border-radius: 7px; color: white;
+}
+.field:focus { outline: 1px solid var(--green); }
+.urlrow { display: grid; grid-template-columns: 1fr auto; gap: 10px; }
+.video-shell {
+  margin-top: 18px; border: 1px solid var(--line);
+  border-radius: 12px; overflow: hidden; background: #020402;
+}
+.player { width: 100%; aspect-ratio: 16/9; border: 0; display: block; }
+.empty {
+  aspect-ratio: 16/9; display: grid; place-items: center;
+  text-align: center; padding: 20px; color: #8ca18e;
+}
+.empty strong { display: block; color: var(--green); font-size: 20px; }
+.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.card, .authbox {
+  border: 1px solid var(--line); background: var(--panel);
+  padding: 20px; border-radius: 10px;
+}
+.card .n { font-size: 10px; color: var(--green); letter-spacing: 2px; }
+.card p { color: var(--muted); font-size: 13px; line-height: 1.7; }
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0; }
+.tab {
+  border: 1px solid #2a432d; color: #b5c6b5; background: #070c08;
+  border-radius: 7px; padding: 10px; font-size: 11px; font-weight: 800; cursor: pointer;
+}
+.tab.active { border-color: var(--green); color: #061006; background: var(--green); }
+.authgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.full { grid-column: 1 / -1; }
+.label { display: block; font-size: 11px; margin-bottom: 7px; }
+.authmsg { margin-top: 14px; font-size: 12px; line-height: 1.7; color: #c1d3c1; }
+.notice {
+  border: 1px solid #725c22; background: #1a1608; color: #f4dda0;
+  padding: 13px; border-radius: 8px; font-size: 12px; line-height: 1.7; margin-top: 16px;
+}
+.pill { border: 1px solid #36563a; border-radius: 100px; padding: 5px 8px; color: var(--green); font-size: 9px; }
+footer { border-top: 1px solid var(--line); padding: 25px 0; color: #839584; font-size: 11px; }
+@media(max-width:720px) {
+  .hero, .features, .authgrid, .urlrow { grid-template-columns: 1fr; }
+  .full { grid-column: auto; }
+  .symbol { font-size: 75px; }
+  .navlinks { gap: 9px; font-size: 10px; }
+}
+</style>
 </head>
 <body>
-  <header>CONSTI<span class="green">XLL</span></header>
 
-  <main>
-    <div class="hero">
-      <p>WELCOME TO MY OFFICIAL WEBSITE</p>
-      <div class="logo">CONSTI<span class="green">XLL</span></div>
-      <p>🎮 GAMING · VIDEOS · GOOD VIBES 🎮</p>
-      <p>Welcome to the ConstiXLL universe.<br>
-      Get ready to play, watch, and level up!</p>
-      <a class="button" href="#games">EXPLORE</a>
-      <a class="button" href="#socials">MY LINKS</a>
+<header class="top">
+  <div class="wrap nav">
+    <a class="logo" href="#home">CONSTI<span>XLL</span></a>
+    <nav class="navlinks">
+      <a href="#watch">WATCH</a>
+      <a href="#features">FEATURES</a>
+      <a href="#account">ACCOUNT</a>
+    </nav>
+    <a class="btn alt" href="#account">SIGN IN</a>
+  </div>
+</header>
+
+<main class="wrap">
+<section class="hero" id="home">
+  <div>
+    <div class="eyebrow">THE OFFICIAL CONSTIXLL HUB</div>
+    <h1>YOUR VIDEOS.<br><span class="green">YOUR WORLD.</span></h1>
+    <p>Watch videos, join the community, and request Creator or Admin access.</p>
+    <a class="btn" href="#watch">WATCH VIDEOS</a>
+    <a class="btn alt" href="#account">OPEN ACCOUNT</a>
+  </div>
+  <div class="hero-panel">
+    <div class="symbol">C<span style="color:white">X</span></div>
+    <div class="panel-note">CREATE · WATCH · CONNECT</div>
+  </div>
+</section>
+
+<section class="section" id="watch">
+  <div class="eyebrow">VIDEO PLAYER</div>
+  <h2>WATCH <span class="green">CONSTIXLL</span></h2>
+  <p class="muted">Paste a YouTube video or Shorts link.</p>
+  <div class="urlrow">
+    <input class="field" id="videoUrl" placeholder="Paste YouTube link here">
+    <button class="btn" id="loadVideo">LOAD VIDEO</button>
+  </div>
+  <div class="video-shell" id="videoShell">
+    <div class="empty"><div><strong>CONSTIXLL PLAYER</strong>Paste a video link above.</div></div>
+  </div>
+  <p class="muted" id="videoStatus"></p>
+</section>
+
+<section class="section" id="features">
+  <div class="eyebrow">THE HUB</div>
+  <h2>BUILT FOR THE <span class="green">SQUAD</span></h2>
+  <div class="features">
+    <article class="card">
+      <div class="n">01 / WATCH</div>
+      <h3>Videos in one place</h3>
+      <p>Load supported YouTube links and watch them on this page.</p>
+    </article>
+    <article class="card">
+      <div class="n">02 / MEMBER</div>
+      <h3>Member login</h3>
+      <p>Members sign in directly. No quote is required.</p>
+    </article>
+    <article class="card">
+      <div class="n">03 / CREATOR</div>
+      <h3>Creator and Admin</h3>
+      <p>Creator and Admin applications require a quote and approval.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section" id="account">
+  <div class="eyebrow">ACCOUNT CENTER</div>
+  <h2>ROLE <span class="green">ACCESS</span></h2>
+
+  <div class="features">
+    <article class="card">
+      <div class="n">CREATOR</div>
+      <h3>Quote required</h3>
+      <p>Creator requests are reviewed through the owner review panel.</p>
+    </article>
+    <article class="card">
+      <div class="n">ADMIN</div>
+      <h3>Limited permissions</h3>
+      <p>Creators review Admin quotes. Admins cannot approve other Admins.</p>
+    </article>
+    <article class="card">
+      <div class="n">MEMBER</div>
+      <h3>No quote required</h3>
+      <p>Members can use the Member Login tab directly.</p>
+    </article>
+  </div>
+
+  <div class="authbox" style="margin-top:18px">
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-role="member">MEMBER LOGIN</button>
+      <button class="tab" data-role="request">CREATOR / ADMIN QUOTE</button>
+      <button class="tab" data-role="status">MY STATUS</button>
+      <button class="tab" data-role="creatorReview">CREATOR REVIEW</button>
+      <button class="tab" data-role="owner">OWNER REVIEW</button>
     </div>
 
-    <section id="games">
-      <h2>🎮 GAME ZONE</h2>
-      <div class="card">
-        <h3>Green Reaction Challenge</h3>
-        <p>Test your reflexes! Wait for green, then tap as fast as you can.</p>
-        <button class="button" id="game">START GAME</button>
-        <p id="result">Ready to play?</p>
-      </div>
-    </section>
+    <div id="memberPanel">
+      <p class="muted">Members can sign in without a quote.</p>
+      <form id="memberForm">
+        <div class="authgrid">
+          <div>
+            <label class="label" for="memberEmail">MEMBER EMAIL</label>
+            <input class="field" id="memberEmail" type="email" required placeholder="you@example.com">
+          </div>
+          <div>
+            <label class="label" for="memberPassword">PASSWORD</label>
+            <input class="field" id="memberPassword" type="password" required minlength="6" placeholder="Your password">
+          </div>
+          <div class="full">
+            <button class="btn" type="submit">SIGN IN AS MEMBER</button>
+          </div>
+        </div>
+      </form>
+      <div class="authmsg" id="memberMessage">Demo only. Secure authentication must be connected for real sign-in.</div>
+    </div>
 
-    <section id="socials">
-      <h2>🔥 CONNECT WITH ME</h2>
-      <div class="card">
-        <h3>YouTube</h3>
-        <p>Watch my gaming videos and shorts!</p>
-        <a class="button" href="https://www.youtube.com/" target="_blank" rel="noopener">YOUTUBE</a>
-      </div>
-      <div class="card">
-        <h3>My Socials</h3>
-        <p>More ConstiXLL content coming soon!</p>
-      </div>
-    </section>
-  </main>
+    <div id="requestPanel" hidden>
+      <form id="quoteForm">
+        <div class="authgrid">
+          <div>
+            <label class="label" for="creatorName">YOUR NAME</label>
+            <input class="field" id="creatorName" required maxlength="60" placeholder="Your name">
+          </div>
+          <div>
+            <label class="label" for="creatorEmail">EMAIL ADDRESS</label>
+            <input class="field" id="creatorEmail" type="email" required placeholder="you@example.com">
+          </div>
+          <div class="full">
+            <label class="label" for="requestedRole">ROLE REQUESTED</label>
+            <select class="field" id="requestedRole">
+              <option value="creator">Creator</option>
+              <option value="admin">Admin — limited access</option>
+            </select>
+          </div>
+          <div class="full">
+            <label class="label" for="quoteText">YOUR QUOTE / REQUEST</label>
+            <textarea class="field" id="quoteText" required maxlength="1200" rows="4" placeholder="Explain why you want access and what you want to create."></textarea>
+          </div>
+          <div class="full">
+            <button class="btn" type="submit">SEND QUOTE FOR APPROVAL</button>
+          </div>
+        </div>
+      </form>
+      <div class="authmsg" id="quoteMessage">Creator and Admin quotes are stored in this browser demo.</div>
+    </div>
 
-  <footer>
-    © <span id="year"></span> CONSTIXLL · LEVEL UP EVERY DAY 💚
-  </footer>
+    <div id="statusPanel" hidden>
+      <label class="label" for="statusEmail">EMAIL USED IN YOUR REQUEST</label>
+      <input class="field" id="statusEmail" type="email" placeholder="you@example.com">
+      <button class="btn" id="checkStatus" type="button" style="margin-top:10px">CHECK MY STATUS</button>
+      <div class="authmsg" id="statusMessage"></div>
+    </div>
 
-  <script>
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
+    <div id="creatorReviewPanel" hidden>
+      <div class="notice">Demo only. In a real site, only a verified Creator can review Admin requests. Admins must not have approval permission.</div>
+      <p class="muted">Review Admin applications below.</p>
+      <div id="adminQuoteList" class="authmsg">No Admin requests yet.</div>
+    </div>
 
-    let waiting = false;
-    let started = 0;
-    let timer;
+    <div id="ownerPanel" hidden>
+      <div class="notice">Demo only. In a real site, this area must be restricted to your authorized owner account.</div>
+      <p class="muted">Review Creator applications below.</p>
+      <div id="quoteList" class="authmsg">No Creator requests yet.</div>
+    </div>
+  </div>
 
-    const game = document.getElementById("game");
-    const result = document.getElementById("result");
+  <div class="notice">
+    Important: this prototype stores quotes only in this browser on this device.
+    Real member accounts, shared requests, and secure role permissions require a backend.
+  </div>
+</section>
+</main>
 
-    game.onclick = function() {
-      clearTimeout(timer);
+<footer class="wrap">
+  © <span id="year"></span> CONSTIXLL — STAY CREATIVE. STAY UNSTOPPABLE.
+</footer>
 
-      if (waiting === true) {
-        waiting = false;
-        game.style.background = "#39ff14";
-        game.textContent = "START AGAIN";
-        result.textContent = "Too early! Try again.";
-        return;
-      }
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
 
-      waiting = true;
-      game.style.background = "#d83232";
-      game.textContent = "WAIT FOR GREEN...";
-      result.textContent = "Don't tap yet!";
+/* YouTube player */
+function extractYouTubeId(input) {
+  const raw = input.trim();
+  if (/^[A-Za-z0-9_-]{11}$/.test(raw)) return raw;
+  let url;
+  try { url = new URL(raw); } catch { return null; }
+  const host = url.hostname.toLowerCase().replace(/^www\./, "").replace(/^m\./, "");
+  if (host === "youtu.be") {
+    const id = url.pathname.split("/").filter(Boolean)[0];
+    return id && /^[A-Za-z0-9_-]{11}$/.test(id) ? id : null;
+  }
+  if (host !== "youtube.com" && host !== "youtube-nocookie.com") return null;
+  let id = url.searchParams.get("v");
+  if (!id) {
+    const parts = url.pathname.split("/").filter(Boolean);
+    if (["embed", "shorts", "live", "v"].includes(parts[0])) id = parts[1];
+  }
+  return id && /^[A-Za-z0-9_-]{11}$/.test(id) ? id : null;
+}
 
-      timer = setTimeout(function() {
-        if (!waiting) return;
-        started = performance.now();
-        game.style.background = "#39ff14";
-        game.textContent = "TAP NOW!";
-        result.textContent = "GO GO GO!";
-        waiting = "go";
-      }, 1500 + Math.random() * 2500);
-    };
+function loadVideo() {
+  const input = document.getElementById("videoUrl");
+  const shell = document.getElementById("videoShell");
+  const status = document.getElementById("videoStatus");
+  const id = extractYouTubeId(input.value);
 
-    game.addEventListener("click", function() {
-      if (waiting !== "go") return;
-      const time = Math.round(performance.now() - started);
-      waiting = false;
-      game.style.background = "#39ff14";
-      game.textContent = "PLAY AGAIN";
-      result.textContent = "Your reaction time: " + time + " ms!";
+  if (!id) {
+    status.textContent = "Please enter a valid YouTube video or Shorts link.";
+    return;
+  }
+
+  shell.replaceChildren();
+  const frame = document.createElement("iframe");
+  frame.className = "player";
+  frame.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id);
+  frame.title = "ConstiXLL YouTube player";
+  frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+  frame.allowFullscreen = true;
+  shell.appendChild(frame);
+  status.textContent = "Video loaded. Some videos do not allow embedding.";
+}
+
+document.getElementById("loadVideo").addEventListener("click", loadVideo);
+document.getElementById("videoUrl").addEventListener("keydown", event => {
+  if (event.key === "Enter") loadVideo();
+});
+
+/* Demo quote storage — this is NOT secure online authentication */
+const storageKey = "constixll_quotes_demo_v1";
+
+function getQuotes() {
+  try { return JSON.parse(localStorage.getItem(storageKey) || "[]"); }
+  catch { return []; }
+}
+function saveQuotes(quotes) {
+  localStorage.setItem(storageKey, JSON.stringify(quotes));
+}
+function safeText(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[char]);
+}
+
+/* Tabs */
+const tabs = [...document.querySelectorAll(".tab")];
+const panels = {
+  member: document.getElementById("memberPanel"),
+  request: document.getElementById("requestPanel"),
+  status: document.getElementById("statusPanel"),
+  creatorReview: document.getElementById("creatorReviewPanel"),
+  owner: document.getElementById("ownerPanel")
+};
+
+function selectPanel(name) {
+  tabs.forEach(tab => tab.classList.toggle("active", tab.dataset.role === name));
+  Object.entries(panels).forEach(([key, panel]) => {
+    panel.hidden = key !== name;
+  });
+  if (name === "creatorReview") renderQuotes("admin");
+  if (name === "owner") renderQuotes("creator");
+}
+tabs.forEach(tab => tab.addEventListener("click", () => selectPanel(tab.dataset.role)));
+
+/* Members sign in without a quote. Demo only: password is not saved. */
+document.getElementById("memberForm").addEventListener("submit", event => {
+  event.preventDefault();
+  document.getElementById("memberMessage").textContent =
+    "Demo only: no password was saved or sent. Connect secure authentication for real member sign-in. No quote is required for Members.";
+});
+
+/* Creator/Admin quote requests */
+document.getElementById("quoteForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  const name = document.getElementById("creatorName").value.trim();
+  const email = document.getElementById("creatorEmail").value.trim().toLowerCase();
+  const role = document.getElementById("requestedRole").value;
+  const quote = document.getElementById("quoteText").value.trim();
+
+  if (!name || !email || !quote) return;
+
+  const quotes = getQuotes();
+  const pending = quotes.some(item =>
+    item.email === email && item.role === role && item.status === "pending"
+  );
+
+  if (pending) {
+    document.getElementById("quoteMessage").textContent =
+      "You already have a pending request for this role and email.";
+    return;
+  }
+
+  quotes.unshift({
+    id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
+    name, email, role, quote,
+    status: "pending",
+    created: new Date().toLocaleString()
+  });
+
+  saveQuotes(quotes);
+  document.getElementById("quoteMessage").textContent =
+    role.toUpperCase() + " quote submitted. Status: PENDING REVIEW.";
+  event.target.reset();
+});
+
+/* Check quote status */
+document.getElementById("checkStatus").addEventListener("click", () => {
+  const email = document.getElementById("statusEmail").value.trim().toLowerCase();
+  const output = document.getElementById("statusMessage");
+  const matches = getQuotes().filter(item => item.email === email);
+
+  if (!email) {
+    output.textContent = "Enter the email used in your request.";
+    return;
+  }
+  if (!matches.length) {
+    output.textContent = "No request found for this email in this browser.";
+    return;
+  }
+
+  output.innerHTML = matches.map(item =>
+    '<div class="card" style="margin-top:10px">' +
+    '<strong>' + safeText(item.name) + '</strong>' +
+    '<p>Requested role: ' + safeText(item.role.toUpperCase()) + '</p>' +
+    '<p>Status: <span class="green">' + safeText(item.status.toUpperCase()) + '</span></p>' +
+    '<p>' + safeText(item.quote) + '</p></div>'
+  ).join("");
+});
+
+/* Separate review lists: Creator quotes vs Admin quotes */
+function renderQuotes(role) {
+  const list = role === "admin"
+    ? document.getElementById("adminQuoteList")
+    : document.getElementById("quoteList");
+
+  const quotes = getQuotes().filter(item => item.role === role);
+
+  if (!quotes.length) {
+    list.textContent = "No " + role + " requests yet in this browser.";
+    return;
+  }
+
+  list.innerHTML = quotes.map(item =>
+    '<article class="card" style="margin:12px 0">' +
+    '<div class="n">' + safeText(item.status.toUpperCase()) + '</div>' +
+    '<h3>' + safeText(item.name) + '</h3>' +
+    '<p>' + safeText(item.email) + '</p>' +
+    '<p>' + safeText(item.quote) + '</p>' +
+    (item.status === "pending"
+      ? '<button class="btn" data-action="accept" data-id="' + safeText(item.id) + '">ACCEPT QUOTE</button> ' +
+        '<button class="btn alt" data-action="decline" data-id="' + safeText(item.id) + '">DECLINE</button>'
+      : '<p class="green">Decision: ' + safeText(item.status.toUpperCase()) + '</p>') +
+    '</article>'
+  ).join("");
+
+  list.querySelectorAll("button[data-action]").forEach(button => {
+    button.addEventListener("click", () => {
+      const all = getQuotes();
+      const item = all.find(entry => entry.id === button.dataset.id);
+
+      /* This demo separates review lists. Real permissions must be server-enforced. */
+      if (!item || item.role !== role) return;
+
+      item.status = button.dataset.action === "accept" ? "accepted" : "declined";
+      saveQuotes(all);
+      renderQuotes(role);
     });
-  </script>
+  });
+}
+</script>
 </body>
 </html>
